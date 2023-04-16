@@ -134,7 +134,7 @@ export default class Home extends Component {
           {!this.state.elStarted & !this.state.elEnded ? (
             <div className="container-item info">
               <center>
-                <h3>The election has not been initialize.</h3>
+                <h3>The election has not been initialized.</h3>
                 {this.state.isAdmin ? (
                   <p>Set up the election.</p>
                 ) : (
