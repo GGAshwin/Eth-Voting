@@ -13,5 +13,10 @@ module.exports = {
       gas: 6721975,
       gasPrice: 20000000000,
     },
+    // ganache: {
+    //   host: "https://sour-queens-take-122-50-194-9.loca.lt",
+    //   port: 80,
+    //   network_id: "*" // Match any network id
+    // }
   },
 };
