@@ -14,7 +14,20 @@ import Election from "../../contracts/Election.json";
 // CSS
 import "./Voting.css";
 
+const getVoted = async () => {
+  const res = await fetch('http://localhost:3001/voterDetails')
+  let data = await res.json()
+  data = data.msg
+  console.log(data);
+  return(
+    <>
+      <h2>{data}</h2>
+    </>
+  )
+}
+
 export default class Voting extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +61,6 @@ export default class Voting extends Component {
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = Election.networks[networkId];
@@ -57,6 +69,7 @@ export default class Voting extends Component {
         deployedNetwork && deployedNetwork.address
       );
 
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({
@@ -64,6 +77,12 @@ export default class Voting extends Component {
         ElectionInstance: instance,
         account: accounts[0],
       });
+
+      // new feature!!!
+      // const voterAddress = accounts[0];
+      // const voterId = await this.state.ElectionInstance.methods.voterDetails(voterAddress).call()
+      // console.log(voterId.call());
+      // console.log(voterId.name);
 
       // Get total number of candidates
       const candidateCount = await this.state.ElectionInstance.methods
@@ -138,7 +157,7 @@ export default class Voting extends Component {
       <div className="container-item">
         <div className="candidate-info">
           <h2>
-            {candidate.header} <small>#{candidate.id}</small>
+            {candidate.header} <small>#{parseInt(candidate.id) + 1}</small>
           </h2>
           <p className="slogan">{candidate.slogan}</p>
         </div>
@@ -194,9 +213,11 @@ export default class Voting extends Component {
                           >
                             See Results
                           </Link>
+                          {getVoted()}
                         </center>
                       </div>
                     </div>
+
                   ) : (
                     <div className="container-item info">
                       <center>Go ahead and cast your vote.</center>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Get Voter Address</title>
+</head>
+<body>
+  <button onclick="getAddress()">Get Voter Address</button>
+  <p id="address"></p>
+
+  <script>
+    async function getAddress() {
+      const response = await fetch('/get-address');
+      const address = await response.text();
+      
+      document.getElementById('address').innerHTML = address;
+    }
+  </script>
+</body>
+</html>
