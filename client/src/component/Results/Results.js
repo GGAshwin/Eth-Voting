@@ -114,7 +114,7 @@ export default class Result extends Component {
           ) : this.state.isElStarted && !this.state.isElEnded ? (
             <div className="container-item attention">
               <center>
-                <h3>The election is being conducted at the movement.</h3>
+                <h3>The election is being conducted at the moment.</h3>
                 <p>Result will be displayed once the election has ended.</p>
                 <p>Go ahead and cast your vote {"(if not already)"}.</p>
                 <br />
