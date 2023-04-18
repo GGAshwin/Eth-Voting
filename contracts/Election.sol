@@ -37,18 +37,20 @@ contract Election {
     mapping(uint256 => Candidate) public candidateDetails;
 
     // Adding new candidates
-    function addCandidate(string memory _header, string memory _slogan)
+    function addCandidate(
+        string memory _header,
+        string memory _slogan
+    )
         public
         // Only admin can add
         onlyAdmin
     {
-        Candidate memory newCandidate =
-            Candidate({
-                candidateId: candidateCount,
-                header: _header,
-                slogan: _slogan,
-                voteCount: 0
-            });
+        Candidate memory newCandidate = Candidate({
+            candidateId: candidateCount,
+            header: _header,
+            slogan: _slogan,
+            voteCount: 0
+        });
         candidateDetails[candidateCount] = newCandidate;
         candidateCount += 1;
     }
@@ -87,18 +89,23 @@ contract Election {
 
     // Get Elections details
     function getElectionDetails()
-    public
-    view
-    returns(string memory adminName, 
-    string memory adminEmail, 
-    string memory adminTitle, 
-    string memory electionTitle, 
-    string memory organizationTitle){
-        return(electionDetails.adminName, 
-        electionDetails.adminEmail, 
-        electionDetails.adminTitle, 
-        electionDetails.electionTitle, 
-        electionDetails.organizationTitle);
+        public
+        view
+        returns (
+            string memory adminName,
+            string memory adminEmail,
+            string memory adminTitle,
+            string memory electionTitle,
+            string memory organizationTitle
+        )
+    {
+        return (
+            electionDetails.adminName,
+            electionDetails.adminEmail,
+            electionDetails.adminTitle,
+            electionDetails.electionTitle,
+            electionDetails.organizationTitle
+        );
     }
 
     // Get candidates count
@@ -121,28 +128,34 @@ contract Election {
         bool isVerified;
         bool hasVoted;
         bool isRegistered;
+        // new
+        uint256 votedCandidateId; // new field to store the id of the candidate the voter voted for
     }
     address[] public voters; // Array of address to store address of voters
     mapping(address => Voter) public voterDetails;
 
     // Request to be added as voter
     function registerAsVoter(string memory _name, string memory _phone) public {
-        Voter memory newVoter =
-            Voter({
-                voterAddress: msg.sender,
-                name: _name,
-                phone: _phone,
-                hasVoted: false,
-                isVerified: false,
-                isRegistered: true
-            });
+        Voter memory newVoter = Voter({
+            voterAddress: msg.sender,
+            name: _name,
+            phone: _phone,
+            hasVoted: false,
+            isVerified: false,
+            isRegistered: true,
+            // new
+            votedCandidateId: 0
+        });
         voterDetails[msg.sender] = newVoter;
         voters.push(msg.sender);
         voterCount += 1;
     }
 
     // Verify voter
-    function verifyVoter(bool _verifedStatus, address voterAddress)
+    function verifyVoter(
+        bool _verifedStatus,
+        address voterAddress
+    )
         public
         // Only admin can verify
         onlyAdmin
@@ -158,6 +171,8 @@ contract Election {
         require(end == false);
         candidateDetails[candidateId].voteCount += 1;
         voterDetails[msg.sender].hasVoted = true;
+        // new
+        voterDetails[msg.sender].votedCandidateId = candidateId; // set the votedCandidateId for the voter
     }
 
     // End election
@@ -173,5 +188,26 @@ contract Election {
 
     function getEnd() public view returns (bool) {
         return end;
+    }
+
+    // new
+    function getVoterVote(address voterAddress) public view returns (uint256) {
+        require(
+            voterDetails[voterAddress].isRegistered == true,
+            "Voter not registered"
+        );
+        require(
+            voterDetails[voterAddress].hasVoted == true,
+            "Voter has not voted yet"
+        );
+        return voterDetails[voterAddress].votedCandidateId;
+    }
+
+    function getCandidateName(
+        uint256 candidateId
+    ) public view returns (string memory) {
+        require(candidateId < candidateCount, "Invalid candidateId");
+
+        return candidateDetails[candidateId].header;
     }
 }

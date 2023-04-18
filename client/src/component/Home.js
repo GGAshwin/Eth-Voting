@@ -74,9 +74,9 @@ export default class Home extends Component {
 
       // Getting election details from the contract
       const electionDetails = await this.state.ElectionInstance.methods
-      .getElectionDetails()
-      .call();
-      
+        .getElectionDetails()
+        .call();
+
       this.setState({
         elDetails: {
           adminName: electionDetails.adminName,
@@ -191,6 +191,26 @@ export default class Home extends Component {
 
       return (
         <div>
+          <div
+            className="container-item attention"
+            style={{ display: "block" }}
+          >
+            <h2>Do not forget to add candidates.</h2>
+            <p>
+              Go to{" "}
+              <Link
+                title="Add a new "
+                to="/addCandidate"
+                style={{
+                  color: "black",
+                  textDecoration: "underline",
+                }}
+              >
+                add candidates
+              </Link>{" "}
+              page.
+            </p>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {!this.state.elStarted & !this.state.elEnded ? (
               <div className="container-main">

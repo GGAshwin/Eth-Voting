@@ -1,19 +1,100 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Get Voter Address</title>
-</head>
-<body>
-  <button onclick="getAddress()">Get Voter Address</button>
-  <p id="address"></p>
 
+<head>
+  <meta charset="UTF-8">
+  <title>Connect Wallet Example</title>
+</head>
+
+<body>
+  <h1>Connect Wallet Example</h1>
+  <p id="status"></p>
+  <p id="address"></p>
+  <p id="res"></p>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
   <script>
     async function getAddress() {
-      const response = await fetch('/get-address');
-      const address = await response.text();
-      
-      document.getElementById('address').innerHTML = address;
+      // Create a new instance of Web3
+      const web3 = new Web3();
+
+      // Check if a wallet is already connected
+      if (web3.currentProvider) {
+        setStatus('A wallet is already connected.');
+        getCurrentAddress().then(currentAddress => {
+          setAddress(currentAddress);
+        });
+      } else {
+        // Prompt the user to connect a wallet
+        setStatus('Please connect your wallet.');
+
+        // Use the ethereum.enable() method to prompt the user to connect a wallet
+        ethereum.enable().then(accounts => {
+          const currentAddress = accounts[0];
+          setStatus('Wallet connected.');
+          setAddress(currentAddress);
+
+        }).catch(error => {
+          console.error('Error connecting wallet:', error);
+          setStatus('Error connecting wallet.');
+        });
+      }
+
+      // Helper function to set the status text
+      function setStatus(text) {
+        const status = document.getElementById('status');
+        status.textContent = text;
+      }
+
+      // Helper function to set the current wallet address
+      function setAddress(address) {
+
+        const data = {
+          address: address
+        };
+
+        // Options for the fetch request
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        };
+
+        fetch('/voterDetails', options)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Data submitted:', data);
+            const res = document.getElementById('res')
+            res.textContent=data.msg
+          })
+          .catch(error => {
+            console.error('Error submitting data:', error);
+          });
+          
+          const addressElement = document.getElementById('address');
+        addressElement.textContent = 'Current wallet address: ' + address;
+      }
+
+      // Helper function to get the current wallet address
+      async function getCurrentAddress() {
+        return await web3.eth.getAccounts().then(accounts => {
+          return accounts[0];
+        }).catch(error => {
+          console.error('Error getting current wallet address:', error);
+          return null;
+        });
+      }
+
     }
+    getAddress()
   </script>
 </body>
+
 </html>

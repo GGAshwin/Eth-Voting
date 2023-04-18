@@ -4,13 +4,15 @@ const path = require('path');
 const Web3 = require('web3');
 const cors = require('cors')
 const ElectionContract = require('../client/src/contracts/Election.json');
+const { log } = require('console');
 
 app.use(cors())
+app.use(express.json())
 // Connect to Ganache
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
 // Get the contract instance
-const contractAddress = '0x0264fb68511E404E5EbCBFAB1E8003bac5C906f0';
+const contractAddress = '0xd451D00d1838Cd06021597800666AFe88DC93409';
 const electionContract = new web3.eth.Contract(ElectionContract.abi, contractAddress);
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,7 +25,7 @@ app.get('/voterDetails', async (req, res) => {
     //   const voterAddress = req.query.address;
     const accounts = await web3.eth.getAccounts();
     const voterAddress = accounts[1];
-    console.log(voterAddress);
+    console.log('get ', voterAddress);
     try {
         const voter = await electionContract.methods.voterDetails(voterAddress).call();
         if (voter.hasVoted) {
@@ -37,11 +39,38 @@ app.get('/voterDetails', async (req, res) => {
     }
 });
 
+app.post('/voterDetails', async (req, res) => {
+    const voterAddress = req.body.address;
+    try {
+        const voter = await electionContract.methods.voterDetails(voterAddress).call();
+        if (voter.hasVoted) {
+            console.log(voter);
+
+            const candidateId = voter.votedCandidateId;
+            electionContract.methods.getCandidateName(candidateId).call((error, result) => {
+                if (error) {
+                    console.error('Error:', error);
+                } else {
+                    console.log('Candidate Name:', result);
+                    res.json({ 'msg': `You have voted for candidate ${result}` });
+                }
+            });
+
+        } else {
+            console.log('here');
+            res.send('You have not voted yet.');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Something went wrong.');
+    }
+});
+
 app.get('/get-address', async (req, res) => {
     const accounts = await web3.eth.getAccounts();
     const voterAddress = accounts[0];
-
-    res.send(voterAddress);
+    console.log(accounts[0]);
+    res.json({ voterAddress });
 });
 
 app.listen(3001, () => {

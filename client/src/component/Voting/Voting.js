@@ -213,7 +213,7 @@ export default class Voting extends Component {
                           >
                             See Results
                           </Link>
-                          {getVoted()}
+                          {/* {getVoted()} */}
                         </center>
                       </div>
                     </div>

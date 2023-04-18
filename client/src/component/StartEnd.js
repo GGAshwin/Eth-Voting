@@ -21,26 +21,6 @@ const StartEnd = (props) => {
           {/* edit here to display start election Again button */}
           {!props.elEnded ? (
             <>
-              <div
-                className="container-item attention"
-                style={{ display: "block" }}
-              >
-                <h2>Do not forget to add candidates.</h2>
-                <p>
-                  Go to{" "}
-                  <Link
-                    title="Add a new "
-                    to="/addCandidate"
-                    style={{
-                      color: "black",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    add candidates
-                  </Link>{" "}
-                  page.
-                </p>
-              </div>
               <div className="container-item">
                 <button type="submit" style={btn}>
                   Start Election {props.elEnded ? "Again" : null}
