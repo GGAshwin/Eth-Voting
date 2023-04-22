@@ -1,3 +1,11 @@
+:root{
+  --bg:#373B61;
+  --bg2:#EDEFFE;
+  --txt:#373B61;
+  --txt2:#A7D5E5;
+  --bg3:#FCEFE9;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +37,9 @@ code {
 
 .container-item {
   transition: ease all 0.5s;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  /* background: none !important; */
+  background-color: var(--bg);
   border-radius: 7px;
   width: 977px;
   padding: 17px;
@@ -38,6 +48,7 @@ code {
   justify-content: center;
   display: flex;
   overflow: auto;
+  color: var(--bg2);
 }
 
 .title {
@@ -99,11 +110,19 @@ code {
   margin-bottom: 11px px;
 }
 .info {
-  background-color: #ddffff;
+  background-color: var(--bg3);
+  color: var(--txt);
 }
 .attention {
-  background-color: #fffbdd;
+  background-color: #A7D5E5;
+  color: var(--bg);
 }
 .success {
-  background-color: #ddffdd;
+  background-color: var(--bg);
+  color: var(--bg2);
+}
+
+tr{
+  background-color: var(--txt2);
+  color: var(--txt);
 }

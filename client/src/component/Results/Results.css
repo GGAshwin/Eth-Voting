@@ -1,3 +1,10 @@
+:root{
+  --bg:#373B61;
+  --bg2:#EDEFFE;
+  --txt:#373B61;
+  --txt2:#A7D5E5;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -14,7 +21,8 @@ tr:nth-child(even) {
 }
 .container-winner {
   transition: ease all 0.75s;
-  background-color: #f5fffa;
+  /* background-color: #f5fffa; */
+  background: var(--bg);
   border-radius: 7px;
   width: 700px;
   padding: 25px;
@@ -26,7 +34,8 @@ tr:nth-child(even) {
 }
 .winner-slogan {
   padding: 7px 7px 7px 1px;
-  color: #ccab00;
+  /* color: #ccab00; */
+  color: var(--bg2);
   font-size: 1.5em;
   margin: 7px 0px;
   text-align: justify;
@@ -39,6 +48,9 @@ tr:nth-child(even) {
   margin-right: 1%;
   overflow: auto;
 }
+.winner-info h2{
+  color: var(--txt2);
+}
 .winner-votes {
   width: 25%;
   padding: 3px;
@@ -47,11 +59,11 @@ tr:nth-child(even) {
 }
 .winner-tag {
   text-align: left;
-  color: hotpink;
+  color: var(--bg2);
 }
 .votes-tag {
   text-align: left;
-  color: darkgray;
+  color: var(--bg2);
 }
 .vote-count {
   margin-top: 11px;
@@ -59,6 +71,7 @@ tr:nth-child(even) {
   font-size: 57px;
   overflow-y: auto;
   text-align: center;
+  color: var(--txt2);
 }
 @media all and (max-width: 850px) {
   .container-winner {
