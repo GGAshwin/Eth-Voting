@@ -11,7 +11,7 @@ app.use(express.json())
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
 // Get the contract instance
-const contractAddress = '0xB646efBfEb6682c45bbFA3ee198985D2986b7616';
+const contractAddress = '0x3b4007F5f09eEAb5c9249067dBD5d35c8b01014d';
 const electionContract = new web3.eth.Contract(ElectionContract.abi, contractAddress);
 
 app.use(express.static(path.join(__dirname, 'public')));
