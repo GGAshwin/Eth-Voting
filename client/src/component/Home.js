@@ -313,10 +313,10 @@ export default class Home extends Component {
               elEnded={this.state.elEnded}
               endElFn={this.endElection}
             />
-            <ElectionStatus
+            {/* <ElectionStatus
               elStarted={this.state.elStarted}
               elEnded={this.state.elEnded}
-            />
+            /> */}
           </form>
         </div>
       );
