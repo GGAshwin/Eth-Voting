@@ -12,7 +12,7 @@
     "react-scripts": "^4.0.3",
     "web3": "1.2.2"
   },
-"scripts": {
+  "scripts": {
     "start": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
