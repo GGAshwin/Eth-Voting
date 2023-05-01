@@ -21,22 +21,24 @@ tr:nth-child(even) {
 }
 .container-winner {
   transition: ease all 0.75s;
-  /* background-color: #f5fffa; */
-  background: var(--bg);
   border-radius: 7px;
   width: 700px;
   padding: 25px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 17px;
-  margin-bottom: 17px;
   overflow: auto;
+ 
+}
+.container-main{
+  margin-top: 2.5em !important;
 }
 .winner-slogan {
   padding: 7px 7px 7px 1px;
   /* color: #ccab00; */
-  color: var(--bg2);
-  font-size: 1.5em;
+  color: rgb(154, 154, 154);
+  font-size: 1em;
+  font-weight: 600;
   margin: 7px 0px;
   text-align: justify;
   overflow: auto;
@@ -49,7 +51,7 @@ tr:nth-child(even) {
   overflow: auto;
 }
 .winner-info h2{
-  color: var(--txt2);
+  color: #03C988;
 }
 .winner-votes {
   width: 25%;
@@ -59,11 +61,11 @@ tr:nth-child(even) {
 }
 .winner-tag {
   text-align: left;
-  color: var(--bg2);
+  color: #ffffff;
 }
 .votes-tag {
   text-align: left;
-  color: var(--bg2);
+  color: whitesmoke;
 }
 .vote-count {
   margin-top: 11px;
@@ -71,7 +73,7 @@ tr:nth-child(even) {
   font-size: 57px;
   overflow-y: auto;
   text-align: center;
-  color: var(--txt2);
+  color: #ffffff;
 }
 @media all and (max-width: 850px) {
   .container-winner {

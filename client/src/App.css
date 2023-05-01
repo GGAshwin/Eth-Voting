@@ -140,9 +140,19 @@ body{
   color: black;
 }
 
+th{
+  background-color: black;
+  color: white;
+  border: none;
+  outline: none;
+}
 tr{
-  background-color: var(--txt2);
-  color: var(--txt);
+  background-color: #fff;
+  color: black;
+  
+}
+tr:nth-child(even){
+  background-color: #f2f2f2;
 }
 
 body::-webkit-scrollbar{
@@ -151,4 +161,14 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb{
   background: #fff;
   border-radius: 10px;
+}
+button{
+  cursor: pointer;
+  outline: none;
+  border: 1px solid white;
+}
+button:hover{
+  background: black;
+  color: white;
+  border: 1px solid white;
 }
