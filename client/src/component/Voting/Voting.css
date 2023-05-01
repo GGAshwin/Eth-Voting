@@ -13,13 +13,15 @@ p {
   padding: 3px;
 }
 .contact {
-  color: grey;
+  color: white;
 }
 .slogan {
-  color: #ccab00;
-  font-size: 1.5em;
+  color: #fff;
+  font-size: 1em;
   margin: 7px 0px;
+
 }
+
 .discription {
   padding: 11px;
   padding-left: 1px;
@@ -27,6 +29,7 @@ p {
   max-height: 111px;
   overflow: auto;
   line-height: 1.5em;
+  
 }
 
 .candidate-info {
@@ -35,7 +38,7 @@ p {
   float: left;
   margin-left: 1%;
   padding: 17px;
-  background-color: #e5e5e5;
+  background-color: #000;
   border-radius: 11px;
 }
 .vote-btn-container {
@@ -49,8 +52,8 @@ p {
 }
 .vote-bth {
   width: 100%;
-  height: 55px;
-  font-size: 157%;
+  height: 3em;
+  font-weight: 500;
 }
 @media all and (max-width: 900px) {
   .candidate-info,

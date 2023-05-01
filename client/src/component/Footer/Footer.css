@@ -7,7 +7,7 @@
 }
 .footer {
   background-color: beige;
-  border-top: 1px solid #e7e7e7;
+  /* border-top: 1px solid #e7e7e7; */
   text-align: center;
   position: fixed;
   left: 0;

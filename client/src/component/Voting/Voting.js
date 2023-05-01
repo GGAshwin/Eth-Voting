@@ -147,7 +147,7 @@ export default class Voting extends Component {
     };
     const confirmVote = (id, header) => {
       var r = window.confirm(
-        "Vote for " + header + " with Id " + id + ".\nAre you sure?"
+        "Vote for " + header + " with ID: " + parseInt(id+1) + "\nPress a button!\nEither OK or Cancel to proceed."
       );
       if (r === true) {
         castVote(id);
@@ -201,9 +201,14 @@ export default class Voting extends Component {
                   this.state.currentVoter.hasVoted ? (
                     <div className="container-item success">
                       <div>
-                        <strong>You've casted your vote.</strong>
+                        <strong >Thank You!</strong> <br />
+                        <strong>You Have succesfully casted your vote.</strong>
                         <p />
-                        <center>
+                        {/* ReDirect to /Thankyou */}
+
+                     
+
+                        {/* <center>
                           <Link
                             to="/Results"
                             style={{
@@ -213,8 +218,7 @@ export default class Voting extends Component {
                           >
                             See Results
                           </Link>
-                          {/* {getVoted()} */}
-                        </center>
+                        </center> */}
                       </div>
                     </div>
 
@@ -270,12 +274,12 @@ export default class Voting extends Component {
                 <center>
                   <h3>The Election ended.</h3>
                   <br />
-                  <Link
+                  {/* <Link
                     to="/Results"
                     style={{ color: "black", textDecoration: "underline" }}
                   >
                     See results
-                  </Link>
+                  </Link> */}
                 </center>
               </div>
             </>

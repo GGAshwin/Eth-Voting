@@ -1,16 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 :root{
   --bg:#373B61;
-  --bg2:#EDEFFE;
+  --bg2:#000;
   --txt:#373B61;
   --txt2:#A7D5E5;
   --bg3:#FCEFE9;
+  --white:#fff;
 }
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-family: 'Poppins', sans-serif;
 }
 h1 {
   text-align: center;
@@ -24,23 +28,29 @@ code {
   border-radius: 6px;
   border: 1px solid;
 }
-
+body{
+  background-color: #100F0F;
+}
 .container-main {
-  background-color: none;
-  padding: 1%;
+  background: #292929d6;
+  color: white;
+  padding: 2.5em;
   margin: 11px;
   margin-left: auto;
   margin-right: auto;
   width: max-content;
   overflow: auto;
+  border-radius: 10px;
+
+  
 }
 
 .container-item {
   transition: ease all 0.5s;
   /* background-color: #f2f2f2; */
   /* background: none !important; */
-  background-color: var(--bg);
-  border-radius: 7px;
+  background-color: #292929d6;
+  border-radius: 15px;
   width: 977px;
   padding: 17px;
   margin: 17px auto;
@@ -48,7 +58,10 @@ code {
   justify-content: center;
   display: flex;
   overflow: auto;
-  color: var(--bg2);
+  color: white;
+  /* border: whitesmoke 1px solid; */
+  background-color: #292929;
+  margin-bottom: 3.5em;
 }
 
 .title {
@@ -63,6 +76,7 @@ code {
   justify-content: center;
   display: block;
   overflow: auto;
+
 }
 .center-items {
   display: grid;
@@ -110,19 +124,31 @@ code {
   margin-bottom: 11px px;
 }
 .info {
-  background-color: var(--bg3);
+  background-color: #F1F1F1;
   color: var(--txt);
 }
 .attention {
-  background-color: #A7D5E5;
-  color: var(--bg);
+  margin-top: 2em;
+  background-color: #fff;
+  color: var(--txt);
+}
+.attention a {
+  color: #fff;
 }
 .success {
-  background-color: var(--bg);
-  color: var(--bg2);
+  background: white;
+  color: black;
 }
 
 tr{
   background-color: var(--txt2);
   color: var(--txt);
+}
+
+body::-webkit-scrollbar{
+  background: #000;
+}
+body::-webkit-scrollbar-thumb{
+  background: #fff;
+  border-radius: 10px;
 }

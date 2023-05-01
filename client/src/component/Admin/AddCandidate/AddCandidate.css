@@ -23,6 +23,8 @@
   padding: 1em;
   float: inline-end;
   margin: 1em;
+  background: white;
+  color: black;
 }
 
 @media all and (max-width: 400px) {

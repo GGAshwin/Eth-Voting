@@ -10,6 +10,9 @@ const StartEnd = (props) => {
     textAlign: "center",
     width: "333px",
     alignSelf: "center",
+    fontWeight: "bold",
+    borderRadius: "7px",
+
   };
   return (
     <div

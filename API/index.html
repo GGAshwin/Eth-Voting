@@ -6,20 +6,34 @@
   <title>Connect Wallet Example</title>
 
   <style>
+    @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'poppins', sans-serif;
+    }
+    .container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
     body {
       font-family: Arial, sans-serif;
-      background: #F0F0F0;
+      background: #000000;
     }
 
     h1 {
       font-size: 32px;
       margin-bottom: 24px;
-      color: #F45050;
+      color: #fff;
     }
 
     p {
       margin-bottom: 12px;
-      color: #3C486B;
+      color: #ffffff;
     }
 
     #status {
@@ -40,10 +54,12 @@
 </head>
 
 <body>
-  <h1>Connect Wallet Example</h1>
+  <div class="container">
+    <h1>Connect Wallet Example</h1>
   <p id="status"></p>
   <p id="address"></p>
   <p id="res"></p>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
   <script>
