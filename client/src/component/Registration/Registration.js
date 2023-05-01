@@ -187,7 +187,7 @@ export default class Registration extends Component {
                   </div>
                   <div className="div-li">
                     <label className={"label-r"}>
-                      Phone number <span style={{ color: "tomato" }}>*</span>
+                      Phone number <span style={{ color: "white", fontWeight: 600 }}>*</span>
                       <input
                         className={"input-r"}
                         type="number"

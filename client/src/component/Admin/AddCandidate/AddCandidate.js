@@ -166,15 +166,15 @@ export function loadAdded(candidates) {
   const renderAdded = (candidate) => {
     return (
       <>
-        <div className="container-list success">
+        <div className="container-list success candlist">
           <div
             style={{
               maxHeight: "21px",
               overflow: "auto",
             }}
           >
-            {candidate.id}. <strong>{candidate.header}</strong>:{" "}
-            {candidate.slogan}
+            {candidate.id}. <strong>{candidate.header}</strong>:{"  "}
+            <q>{candidate.slogan}</q>
           </div>
         </div>
       </>

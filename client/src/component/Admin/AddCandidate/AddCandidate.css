@@ -36,3 +36,7 @@
     float: inline-start;
   }
 }
+
+.candlist{
+  text-align: left !important;
+}
