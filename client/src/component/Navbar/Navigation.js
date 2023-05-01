@@ -25,9 +25,9 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/Results" activeClassName="nav-active">
+          {/* <NavLink to="/Results" activeClassName="nav-active">
             <i className="fas fa-poll-h" /> Results
-          </NavLink>
+          </NavLink> */}
         </li>
       </ul>
       <i onClick={() => setOpen(!open)} className="fas fa-bars burger-menu"></i>

@@ -124,7 +124,7 @@ body{
   margin-bottom: 11px px;
 }
 .info {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   color: var(--txt);
 }
 .attention {
@@ -136,8 +136,15 @@ body{
   color: #fff;
 }
 .success {
-  background: white;
-  color: black;
+  background: #fff;
+  color: #000;
+  text-align: center;
+  font-weight: 300;
+}
+.green{
+  background: #54B435;
+  color: #fff;
+  font-weight: 200 !important;
 }
 
 th{
@@ -145,6 +152,8 @@ th{
   color: white;
   border: none;
   outline: none;
+  border: 1px solid white;
+  font-weight: 500;
 }
 tr{
   background-color: #fff;
@@ -171,4 +180,11 @@ button:hover{
   background: black;
   color: white;
   border: 1px solid white;
+}
+button:disabled{
+  background: none;
+  color: #ffffff69;
+  border: none;
+  text-decoration: line-through;
+
 }

@@ -199,12 +199,12 @@ export default class Voting extends Component {
               {this.state.currentVoter.isRegistered ? (
                 this.state.currentVoter.isVerified ? (
                   this.state.currentVoter.hasVoted ? (
-                    <div className="container-item success">
+                    <div className="container-item success green">
                       <div>
                         <strong >Thank You!</strong> <br />
                         <strong>You Have succesfully casted your vote.</strong>
                         <p />
-                        {/* ReDirect to /Thankyou */}
+
 
                      
 
@@ -262,7 +262,7 @@ export default class Voting extends Component {
                       className="container-item"
                       style={{ border: "1px solid black" }}
                     >
-                      <center>That is all.</center>
+                      <center><q>The ballot is stronger than the bullet. </q> -Abraham Lincoln</center>
                     </div>
                   </>
                 )}

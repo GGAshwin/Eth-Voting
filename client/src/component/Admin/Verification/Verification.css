@@ -4,4 +4,11 @@
   margin-top: 11px;
   margin-bottom: 11px;
   float: inline-end;
+  background: black;
+  color: white;
+}
+
+.btn-verification:hover {
+  background: #5cdc17;
+  border: 1px solid black;
 }

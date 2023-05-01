@@ -11,7 +11,9 @@ app.use(express.json())
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
 // Get the contract instance
-const contractAddress = '0x3b4007F5f09eEAb5c9249067dBD5d35c8b01014d';
+// get the contract address from the truffle deployment
+const config = require("../src/config.json");
+const { network, contractAddress } = config;
 const electionContract = new web3.eth.Contract(ElectionContract.abi, contractAddress);
 
 app.use(express.static(path.join(__dirname, 'public')));

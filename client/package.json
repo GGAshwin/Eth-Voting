@@ -13,7 +13,7 @@
     "web3": "1.2.2"
   },
   "scripts": {
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start && cd .. && cd API && node app.js",
     "build": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
