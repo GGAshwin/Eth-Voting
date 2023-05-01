@@ -29,6 +29,7 @@ app.get('/voterDetails', async (req, res) => {
     console.log('get ', voterAddress);
     try {
         const voter = await electionContract.methods.voterDetails(voterAddress).call();
+        console.log(voter);
         if (voter.hasVoted) {
             res.json({ 'msg': `You have voted for candidate ${voter.name}` });
         } else {
@@ -53,7 +54,7 @@ app.post('/voterDetails', async (req, res) => {
                     console.error('Error:', error);
                 } else {
                     console.log('Candidate Name:', result);
-                    res.json({ 'msg': `You have voted for candidate ${result}` });
+                    res.json({ 'msg': `You have voted for candidate <b>${result}</b>` });
                 }
             });
 
@@ -73,6 +74,49 @@ app.get('/get-address', async (req, res) => {
     console.log(accounts[0]);
     res.json({ voterAddress });
 });
+
+app.get('/results', async (req, res) => {
+    try {
+      // Call the contract function to retrieve the election results
+      const candidates = [];
+      const candidateCount = await electionContract.methods.getTotalCandidate().call();
+      for (let i = 1; i <= candidateCount; i++) {
+        const candidate = await electionContract.methods.candidateDetails(i - 1).call();
+        candidates.push({
+          id: candidate.candidateId,
+          header: candidate.header,
+          slogan: candidate.slogan,
+          voteCount: candidate.voteCount
+        });
+      }
+  
+      // Format the results data into a JSON object
+      const results = {
+        candidates: candidates,
+        totalCandidates: candidateCount
+      };
+      // send only candidate name and vote count
+        const c = [];
+        for (let i = 0; i < results.candidates.length; i++) {
+            c.push({
+                name: results.candidates[i].header,
+                voteCount: results.candidates[i].voteCount
+            });
+        }
+                
+  
+      // Send the JSON response
+      res.send(c);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving election results');
+    }
+  });
+
+app.get("/result", async (req, res) => {
+    res.sendFile(path.join(__dirname, 'results.html'));
+   
+})
 
 app.listen(3001, () => {
     console.log('Server listening on port 3001');

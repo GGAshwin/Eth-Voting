@@ -13,27 +13,38 @@
       box-sizing: border-box;
       font-family: 'poppins', sans-serif;
     }
+    body{
+      background: #212A3E;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+
+
+
+    }
     .container{
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: #F1F6F9;
+      padding: 2em;
+      border-radius: 15px;
+      flex-wrap: wrap;
     }
-    body {
-      font-family: Arial, sans-serif;
-      background: #000000;
-    }
+
 
     h1 {
       font-size: 32px;
       margin-bottom: 24px;
-      color: #fff;
+      color: #000;
     }
 
     p {
       margin-bottom: 12px;
-      color: #ffffff;
+      color: #03C988;
     }
 
     #status {
@@ -42,23 +53,51 @@
 
     #address {
       font-style: italic;
-      color: #87CBB9;
+      color: #394867;
     }
 
     #res {
-      color: green;
-      font-weight: bold;
+      color: #0B2447;
+
+
     }
+    b{
+      color: #0B2447;
+      font-size: 1em;
+    }
+    .results{
+      background: #59CE8F;
+      height: 2em;
+      min-width: 30%;
+      text-align: center;
+      margin-top: 3em;
+      padding: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      border-radius: 15px;
+
+
+    }
+    .results a{
+      color: #fff;
+    }
+    
   </style>
 
 </head>
 
 <body>
   <div class="container">
-    <h1>Connect Wallet Example</h1>
+    <h1>Verify Your Vote</h1>
   <p id="status"></p>
   <p id="address"></p>
   <p id="res"></p>
+  </div>
+
+  <div class="results">
+    <a href="/result">View Results</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
@@ -121,7 +160,7 @@
           .then(data => {
             console.log('Data submitted:', data);
             const res = document.getElementById('res')
-            res.textContent=data.msg
+            res.innerHTML=data.msg
           })
           .catch(error => {
             console.error('Error submitting data:', error);
@@ -143,6 +182,11 @@
 
     }
     getAddress()
+
+
+
+
+
   </script>
 </body>
 
