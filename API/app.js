@@ -5,10 +5,14 @@ const Web3 = require('web3');
 const cors = require('cors')
 const ElectionContract = require('../client/src/contracts/Election.json');
 
+require('dotenv').config({ path: path.join(__dirname, '../.env')});
+console.log(process.env.IP)
+
 app.use(cors())
 app.use(express.json())
 // Connect to Ganache
-const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+// const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.67.107:7545'));
 
 // Get the contract instance
 // get the contract address from the truffle deployment
@@ -114,7 +118,134 @@ app.get('/results', async (req, res) => {
   });
 
 app.get("/result", async (req, res) => {
-    res.sendFile(path.join(__dirname, 'results.html'));
+    // res.sendFile(path.join(__dirname, 'results.html'));
+    res.send(` 
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', sans-serif;
+        }
+
+        body {
+            background: #E8F9FD;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            outline: none;
+            background-color: #181818;
+            color: #ddd;
+        }
+
+        h1 {
+            color: #000;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1em;
+
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: none;
+            outline: none;
+            color: black;
+            border: 1px solid #ddd;
+        }
+
+
+        th {
+            background-color: #000;
+            color: white;
+           
+
+            
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a{
+            color: #4d2ff4;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+
+        <div style="margin-top: 2em; width: 100%; text-align: center;">
+            <a href="/">Verify Your Vote</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        const f = async () => {
+           try{
+            const res = await fetch('http://${process.env.IP}:3001/results');
+            const json = await res.json();
+            console.log(json);
+            const winner = json.reduce((max, candidate) => { return parseInt(candidate.voteCount) > parseInt(max.voteCount) ? candidate : max; });
+            let html = "";
+            for (const candidate of json) {
+                const isWinner = candidate.name === winner.name;
+                const rowColor = isWinner ? "#59CE8F" : "#E8F9FD";
+                html = html + "<tr style='background: "+rowColor+" '><td>" + candidate.name + "</td><td>" + candidate.voteCount + "</td></tr>";
+
+            }
+            document.getElementById("table-body").innerHTML = html;
+           }
+              catch(err){
+                console.log(err);
+                alert("Results have not been published yet. Please try again later.")
+              }
+        }
+        f()
+    </script>
+
+</body>
+
+</html>
+    `)
    
 })
 

@@ -1,5 +1,5 @@
 const path = require("path");
-
+require("dotenv").config();
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     development: {
       network_id: "*",
-      host: "127.0.0.1",
+      host: process.env.IP,
       port: 7545, // for ganache gui
       // port: 8545, // for ganache-cli
       gas: 6721975,
