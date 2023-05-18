@@ -12,7 +12,7 @@ app.use(cors())
 app.use(express.json())
 // Connect to Ganache
 // const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
-const web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.67.107:7545'));
+const web3 = new Web3(new Web3.providers.HttpProvider(`http://${process.env.IP}:7545`));
 
 // Get the contract instance
 // get the contract address from the truffle deployment
