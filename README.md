@@ -1,109 +1,128 @@
-# Decentralized Voting (dVoting)
+======================================================
++						                                              +
++ 	BLOCK CHAIN BASED VOTING SYSTEM		                 +
++ 		CEC/CS/2022/P07			                               +
++ 	CANARA ENGINEERING COLLEGE MANGALORE	             +
++		      by			                                       +
++ 		 ADITHYA PAI B			                                +
++ 		GG ASHWIN PRABHU 		                              +
++ 		K KESHAVA BHAT			                                +
++ 		M PRAJWAL KINI			                                +
++						                                              +
+======================================================      
 
-A decentralized voting system based on [Ethereum blockchain](https://ethereum.org/dapps/) technology.
 
-> This started as a final year project for the IT Degree that I was/am pursuing, now aiming to make this more than that.
+CONTENTS:
 
-## System Workflow
+0. DESCRIPTION
+1. SYSTEM WORKFLOW
+2. SETUP
+	- REQUIREMENTS
+	- INSTALLING THE ENVIROMENT
+3. CONFIGURING THE PROJECT
+4. DEPLOYMENT
 
-A brief explanation on the basic workflow of the application.
 
-- Admin will create a voting instance by launching/deploying the system in a blockchain network (EVM), then create an election instance and start the election with the details of the election filled in (including candidates for voters to vote).
-- Then the likely voters connect to the same blockchain network register to become a voter. Once the users successfully register, their respective details are sent/displayed in the admins' panel (i.e. verification page).
-- The admin then will check if the registration information (blockchain account address, name, and phone number) is valid and matches with his record. If yes, then the admin approves the registered user making them eligible to take part and cast their respective vote in the election.
-- The registered user (voter) following the approval from the admin casts their vote to the candidate of interest (from the voting page).
-- After some time, depending on the scale of the election the admin ends the election. As that happens the voting is closed and the results are displayed announcing the winner at the top of the results page.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+0. DESCRIPTION
 
-  **See demo [here](https://youtu.be/nh1zfTTrdII "Watch dVoting demo").**
+BlockChain Based Voting 
+This project is a Final Year project From CEC/CS/P07 Group. It provides a secure and decentralized voting system based on blockchain technology. 
+The application ensures that the voting process is transparent, immutable, and secure.
 
----
 
-## Setting up the development environment
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+1. SYSTEM WORKFLOW
 
-### Requirements
+A brief explanation on the basic workflow of the application:
+	* Admin will create a voting instance by launching/deploying the system in a blockchain network (EVM), then create an election instance and start the election with the details 		  of the election filled in (including candidates for voters to vote).
+	* Then the likely voters connect to the same blockchain network register to become a voter. Once the users successfully register, their respective details are sent/displayed in 	  the admins' panel (i.e. verification page).
+	* The admin then will check if the registration information (blockchain account address, name, and phone number) is valid and matches with his record. If yes, then the admin 		  	  approves the registered user making them eligible to take part and cast their respective vote in the election.
+	* The registered user (voter) following the approval from the admin casts their vote to the candidate of interest (from the voting page).
+	* After some time, depending on the scale of the election the admin ends the election. As that happens the voting is closed and the results are displayed announcing the winner 	  	  at the top of the results page.
 
-- [Node.js](https://nodejs.org)
-- [Truffle](https://www.trufflesuite.com/truffle)
-- [Ganache](https://github.com/trufflesuite/ganache-cli) (Cli)
-- [Metamask](https://metamask.io/) (Browser Extension)
+===== REQUIREMENTS=====
 
-#### Getting the requirements
+Node.js
+Truffle
+Ganache (Cli)
+Metamask (Browser Extension)
 
-1. Download and install **NodeJS**
+*THE FOLLOWING FILES CAN BE FOUND IN THIS CD 
 
-   Download and install NodeJS from [here](https://nodejs.org/en/download/ "Go to official NodeJS download page.").
 
-1. Install **truffle** and **ganache-cli** using node packager manager (npm)
+=====SETUP ENVIROMENT=====
 
-   ```shell
-   npm install -g truffle
-   npm install -g ganache-cli
-   ```
+01. Install node-v18.16.0-x64.msi from Setup Files
+02. Install Ganache-2.7.1-win-x64.appx from Setup Files
+03. Install Truffle using command prompt (Powershell) using the command `npm install -g truffle`
+04. Install Metamask on Chrome using the link https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn and login to it
+05. Open Ganache run A workflow and note down the RPC Port URL 
+06. Edit the truffleconfig.js based on this note
+07. Connect Meta Mask To the Ganache local Network and Import an Account using the a Private key from Ganache
+08. Install the client dependencies, Goto client folder and type `npm i ` in the terminal (This will take 3-10 mins)
+08. Go to the client folder and start the front End Application using the command `npm run start`
+09. Open A new terminal and start the Verification Application using the command `cd ../API/ && npm i && node app.js`
+10. Open your browser and goto `http://localhost:3000`
 
-1. Install **metamask** browser extension
 
-   Download and install metamask from [here](https://metamask.io/download "Go to official metamask download page.").
+===Setup Briefed===
 
-### Configuring the project for development
+Install truffle and ganache-cli using node packager manager (npm)
 
-1. Clone this repository
+npm install -g truffle
+npm install -g ganache-cli
+Install metamask browser extension
 
-   ```shell
-   git clone https://github.com/arlbibek/dVoting.git
-   cd dVoting
-   ```
+Download and install metamask from here.
 
-2. Run local Ethereum blockchain
+Configuring the project for development
+Open The source Code
 
-   ```shell
-   ganache-cli
-   ```
+cd Eth-Voting
+Run local Ethereum blockchain
 
-   > Note: Do not close `ganache-cli` (the blockchain network needs to be running all the time)
+ganache-cli
+Note: Do not close ganache-cli (the blockchain network needs to be running all the time) or Open The Ganache Application
 
-3. Configure metamask on the browser with the following details
+Configure metamask on the browser with the following details
 
-   New RPC URL: `http://127.0.0.1:8545` *(use `port: 7545` for **ganache gui**, update it in the file:`truffle-config.js` as well)*
+New RPC URL: http://127.0.0.1:8545 (use port: 7545 for ganache gui, update it in the file:truffle-config.js as well)
 
-   Chain ID: `1337`
+Chain ID: 1337
 
-4. Import account(s) using private keys from ganache-cli to the metamask extension on the browser
+Import account(s) using private keys from ganache-cli to the metamask extension on the browser
 
-5. Deploy smart contract to the (local) blockchain network (i.e ganache-cli)
+Deploy smart contract to the (local) blockchain network (i.e ganache-cli)
 
-   ```shell
-   # on the dVoting directory
-   truffle migrate
-   ```
+# on the dVoting directory
+truffle migrate
+Note: Use truffle migrate --reset for re-deployments
 
-   > Note: Use `truffle migrate --reset` for re-deployments
+Launch the development server (frontend)
 
-6. Launch the development server (frontend)
+cd client
+npm install
+npm start
+If you encounter error during npm install, please note that you might need to install Microsoft Visual C++ Redistributable packages from learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist (here is the direct download link for X64: aka.ms/vs/17/release/vc_redist.x64.exe)
 
-   ```shell
-   cd client
-   npm install
-   npm start
-   ```
+To run the verification Client Application
 
-   > If you encounter **error** during `npm install`, please note that you might need to install Microsoft Visual C++ Redistributable packages from [learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) (here is the direct download link for X64: [aka.ms/vs/17/release/vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe))
+cd ../API/
+npm i
+node app.js
 
-## To-Do List
 
-Possible features to add/improve within the app.
 
-- [ ] **Email Verification**—adding email/phone verification (OTP, etc..) while registering for voters.
-- [ ] **Automated Verification**—adding an automated verification (rather than manually approving by the admin) for the registered users. This could be based on the custom cooperation email, custom list of emails, or custom list of phone numbers, etc.
-- [ ] **Report**—option to generate a report at the end of an election. The report could contain a range of information including the number of people that were eligible to vote, the number of people that participated in the election, a bar-chart/pie-chart showing the election statistics, etc.
-- [ ] **Workflow improvements**—overall workflow improvements (eg. option to add candidates within the election setup page), with overall GUI improvements.
-- [ ] **Multiple election instance**—ability to create multiple election instances without having to re-deploy the smart contract.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+4. DEPLOYMENT
 
-## Join us on Discord
 
-[![Join our Discord server!](https://invidget.switchblade.xyz/3jmfdNsHWr)](https://discord.gg/3jmfdNsHWr)
+Open http://localhost:3000 for Voting booth application.
+Open http://localhost:3001 for Voting verification Application.
 
-[discord.gg/3jmfdNsHWr](https://discord.gg/3jmfdNsHWr "Join us on Discord!")
 
----
+-readme.txt by ADITHYA PAI V
 
-Made with ❤️ by [Bibek Aryal](https://bibeka.com.np/).
+>>>> EOF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
