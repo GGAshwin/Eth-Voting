@@ -7,9 +7,10 @@ module.exports = {
   networks: {
     development: {
       network_id: "*",
-      host: process.env.IP,
-      port: 7545, // for ganache gui
-      // port: 8545, // for ganache-cli
+      // host: process.env.IP,
+      host:"127.0.0.1",
+      // port: 7545, // for ganache gui
+      port: 8545, // for ganache-cli
       gas: 6721975,
       gasPrice: 20000000000,
     },
