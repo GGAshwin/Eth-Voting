@@ -10,11 +10,11 @@ console.log(process.env.IP);
 
 app.use(cors());
 app.use(express.json());
-// Connect to Ganache
-// const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(`http://${process.env.IP}:7545`)
-);
+// Connect to Ganache (CLI)
+const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+// const web3 = new Web3(
+//   new Web3.providers.HttpProvider(`http://${process.env.IP}:7545`)
+// );
 
 // Get the contract instance
 // get the contract address from the truffle deployment
@@ -96,6 +96,8 @@ app.get("/results", async (req, res) => {
     const candidateCount = await electionContract.methods
       .getTotalCandidate()
       .call();
+    console.log(candidateCount);
+
     for (let i = 1; i <= candidateCount; i++) {
       const candidate = await electionContract.methods
         .candidateDetails(i - 1)
@@ -234,7 +236,7 @@ app.get("/result", async (req, res) => {
     <script>
         const f = async () => {
            try{
-            const res = await fetch('http://${process.env.IP}:3001/results');
+            const res = await fetch('http://127.0.0.1:3001/results');
             const json = await res.json();
             console.log(json);
             const winner = json.reduce((max, candidate) => { return parseInt(candidate.voteCount) > parseInt(max.voteCount) ? candidate : max; });

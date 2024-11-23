@@ -1,193 +1,178 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vote Verification Counter</title>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Connect Wallet Example</title>
-
-  <style>
-    @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'poppins', sans-serif;
-    }
-    body{
-      background: #212A3E;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-
-
-
-    }
-    .container{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #F1F6F9;
-      padding: 2em;
-      border-radius: 15px;
-      flex-wrap: wrap;
-    }
-
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 24px;
-      color: #000;
-    }
-
-    p {
-      margin-bottom: 12px;
-      color: #03C988;
-    }
-
-    #status {
-      font-weight: bold;
-    }
-
-    #address {
-      font-style: italic;
-      color: #394867;
-    }
-
-    #res {
-      color: #0B2447;
-
-
-    }
-    b{
-      color: #0B2447;
-      font-size: 1em;
-    }
-    .results{
-      background: #59CE8F;
-      height: 2em;
-      min-width: 30%;
-      text-align: center;
-      margin-top: 3em;
-      padding: 2em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      border-radius: 15px;
-
-
-    }
-    .results a{
-      color: #fff;
-    }
-    
-  </style>
-
-</head>
-
-<body>
-  <div class="container">
-    <h1>Verify Your Vote</h1>
-  <p id="status"></p>
-  <p id="address"></p>
-  <p id="res"></p>
-  </div>
-
-  <div class="results">
-    <a href="/result">View Results</a>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-  <script>
-    async function getAddress() {
-      // Create a new instance of Web3
-      const web3 = new Web3();
-
-      // Check if a wallet is already connected
-      if (web3.currentProvider) {
-        setStatus('A wallet is already connected.');
-        getCurrentAddress().then(currentAddress => {
-          setAddress(currentAddress);
-        });
-      } else {
-        // Prompt the user to connect a wallet
-        setStatus('Please connect your wallet.');
-
-        // Use the ethereum.enable() method to prompt the user to connect a wallet
-        ethereum.enable().then(accounts => {
-          const currentAddress = accounts[0];
-          setStatus('Wallet connected.');
-          setAddress(currentAddress);
-
-        }).catch(error => {
-          console.error('Error connecting wallet:', error);
-          setStatus('Error connecting wallet.');
-        });
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "poppins", sans-serif;
+      }
+      body {
+        background: #212a3e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #f1f6f9;
+        padding: 2em;
+        border-radius: 15px;
+        flex-wrap: wrap;
       }
 
-      // Helper function to set the status text
-      function setStatus(text) {
-        const status = document.getElementById('status');
-        status.textContent = text;
+      h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+        color: #000;
       }
 
-      // Helper function to set the current wallet address
-      function setAddress(address) {
+      p {
+        margin-bottom: 12px;
+        color: #03c988;
+      }
 
-        const data = {
-          address: address
-        };
+      #status {
+        font-weight: bold;
+      }
 
-        // Options for the fetch request
-        const options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        };
+      #address {
+        font-style: italic;
+        color: #394867;
+      }
 
-        fetch('/voterDetails', options)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Data submitted:', data);
-            const res = document.getElementById('res')
-            res.innerHTML=data.msg
-          })
-          .catch(error => {
-            console.error('Error submitting data:', error);
+      #res {
+        color: #0b2447;
+      }
+      b {
+        color: #0b2447;
+        font-size: 1em;
+      }
+      .results {
+        background: #59ce8f;
+        height: 2em;
+        min-width: 30%;
+        text-align: center;
+        margin-top: 3em;
+        padding: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        border-radius: 15px;
+      }
+      .results a {
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Verify Your Vote</h1>
+      <p id="status"></p>
+      <p id="address"></p>
+      <p id="res"></p>
+    </div>
+
+    <a class="results" href="/result" style="text-decoration: none"
+      >View Results</a
+    >
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script>
+      async function getAddress() {
+        // Create a new instance of Web3
+        const web3 = new Web3();
+
+        // Check if a wallet is already connected
+        if (web3.currentProvider) {
+          setStatus("A wallet is already connected.");
+          getCurrentAddress().then((currentAddress) => {
+            setAddress(currentAddress);
           });
-          
-          const addressElement = document.getElementById('address');
-        addressElement.textContent = 'Current wallet address: ' + address;
+        } else {
+          // Prompt the user to connect a wallet
+          setStatus("Please connect your wallet.");
+
+          // Use the ethereum.enable() method to prompt the user to connect a wallet
+          ethereum
+            .enable()
+            .then((accounts) => {
+              const currentAddress = accounts[0];
+              setStatus("Wallet connected.");
+              setAddress(currentAddress);
+            })
+            .catch((error) => {
+              console.error("Error connecting wallet:", error);
+              setStatus("Error connecting wallet.");
+            });
+        }
+
+        // Helper function to set the status text
+        function setStatus(text) {
+          const status = document.getElementById("status");
+          status.textContent = text;
+        }
+
+        // Helper function to set the current wallet address
+        function setAddress(address) {
+          const data = {
+            address: address,
+          };
+
+          // Options for the fetch request
+          const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          };
+
+          fetch("/voterDetails", options)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const res = document.getElementById("res");
+              res.innerHTML = data.msg;
+            })
+            .catch((error) => {
+              console.error("Error submitting data:", error);
+            });
+
+          const addressElement = document.getElementById("address");
+          addressElement.textContent = "Current wallet address: " + address;
+        }
+
+        // Helper function to get the current wallet address
+        async function getCurrentAddress() {
+          return await web3.eth
+            .getAccounts()
+            .then((accounts) => {
+              return accounts[0];
+            })
+            .catch((error) => {
+              console.error("Error getting current wallet address:", error);
+              return null;
+            });
+        }
       }
-
-      // Helper function to get the current wallet address
-      async function getCurrentAddress() {
-        return await web3.eth.getAccounts().then(accounts => {
-          return accounts[0];
-        }).catch(error => {
-          console.error('Error getting current wallet address:', error);
-          return null;
-        });
-      }
-
-    }
-    getAddress()
-
-
-
-
-
-  </script>
-</body>
-
+      getAddress();
+    </script>
+  </body>
 </html>
